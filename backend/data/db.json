@@ -1,0 +1,377 @@
+{
+  "admin_users": [
+    {
+      "id": "admin-1",
+      "email": "admin@example.com",
+      "password_hash": "$2a$10$KWOpxsLcqCkLP68KCB844O.Aq2tVqIC.tu/6IDZ7I3CmqwwGKNkam",
+      "name": "Bipal Kattel",
+      "created_at": "2026-09-11T06:44:37.333Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-1",
+      "title": "Rural Community Hub & Spatial Planning",
+      "slug": "rural-community-hub",
+      "category": "Architecture & Web Tool",
+      "year": "2026",
+      "company": "Department of Urban Development",
+      "short_description": "An architectural spatial design project and interactive map interface for planning community resource centers in rural districts.",
+      "full_description": "This project combines architectural spatial planning with a web-based interactive map. It helps regional planners view facility distribution, calculate access distances, and review architectural 3D building concepts for rural community centers.",
+      "image": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1200&q=80",
+      "technologies": [
+        "React",
+        "Tailwind CSS",
+        "Node.js",
+        "AutoCAD",
+        "SketchUp"
+      ],
+      "github_url": "https://github.com/bipalkattel/rural-community-hub",
+      "live_demo_url": "https://rural-hub.example.com",
+      "problem": "Local administrative offices lacked visual mapping tools and clear architectural floorplans when proposing new rural community centers.",
+      "solution": "Designed a modular 3D building blueprint alongside an interactive web map showing resource coverage zones.",
+      "features": [
+        "Interactive map view displaying local health post and school locations",
+        "Architectural floorplans and 3D Lumion renderings for the community building",
+        "Distance and travel time calculations for nearby villages",
+        "Clean printable summary report generation"
+      ],
+      "challenges": "Balancing detailed CAD drawings with a fast, lightweight web interface.",
+      "results": "Helped local officers present clear 3D visuals and spatial data during municipal budget reviews.",
+      "screenshots": [
+        "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "is_featured": true,
+      "is_published": true,
+      "display_order": 1
+    },
+    {
+      "id": "proj-2",
+      "title": "Sugandhika Artisanal E-Commerce Store",
+      "slug": "sugandhika-store",
+      "category": "E-Commerce Website",
+      "year": "2026",
+      "company": "Sugandhika Essential Oils",
+      "short_description": "A minimalist online store designed for a local Himalayan essential oil brand, featuring scent profiles and order management.",
+      "full_description": "Sugandhika is an e-commerce website built for an organic Himalayan fragrance brand. It features a clean product gallery, scent note descriptions, simple shopping cart drawer, and a back-end admin area to manage inventory.",
+      "image": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=80",
+      "technologies": [
+        "React",
+        "Tailwind CSS",
+        "Vite",
+        "Node.js",
+        "Express"
+      ],
+      "github_url": "https://github.com/bipalkattel/sugandhika-store",
+      "live_demo_url": "https://sugandhika.example.com",
+      "problem": "The brand needed an elegant website that showcased their handcrafted products without feeling like a noisy marketplace.",
+      "solution": "Created a warm off-white design with soft typography, product scent note diagrams, and an easy checkout flow.",
+      "features": [
+        "Product showcase with scent note visualizers (Top, Heart, Base notes)",
+        "Slide-out shopping cart drawer with instant item updating",
+        "Mobile-friendly responsive layout",
+        "Admin panel for updating product listings and viewing customer messages"
+      ],
+      "challenges": "Keeping images crisp and fast-loading across mobile connections.",
+      "results": "Improved customer inquiries and online order requests by 40%.",
+      "screenshots": [
+        "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "is_featured": true,
+      "is_published": true,
+      "display_order": 2
+    },
+    {
+      "id": "proj-3",
+      "title": "Modern Urban Villa & 3D Visuals",
+      "slug": "modern-urban-villa",
+      "category": "Architectural Design & 3D",
+      "year": "2025",
+      "company": "Himalayan Spatial Studio",
+      "short_description": "A modern 3-story residential villa design complete with structural CAD drawings, 3D renderings, and daylight analysis.",
+      "full_description": "Designed a modern 3-story residential villa focused on natural ventilation and daylighting. Delivered full architectural working drawings, 3D SketchUp models, and high-resolution Lumion renderings for the client.",
+      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
+      "technologies": [
+        "AutoCAD",
+        "Revit",
+        "SketchUp",
+        "Lumion",
+        "Photoshop"
+      ],
+      "github_url": "",
+      "live_demo_url": "",
+      "problem": "The client needed a compact house design for a narrow urban plot while maximizing indoor daylight and ventilation.",
+      "solution": "Designed a vertical floorplan with a central light courtyard and exterior timber louvers for solar shading.",
+      "features": [
+        "Complete AutoCAD floorplans, elevations, and structural section drawings",
+        "3D Lumion exterior and interior photorealistic visual renders",
+        "Sun path and daylighting shadow analysis",
+        "Material specification schedule for construction contractor"
+      ],
+      "challenges": "Working within tight municipal setback rules while keeping room sizes spacious.",
+      "results": "Client approved the schematic design on the first presentation review.",
+      "screenshots": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "is_featured": true,
+      "is_published": true,
+      "display_order": 3
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp-1",
+      "organization": "Himalayan Spatial Studio",
+      "position": "Junior Architect & Visualizer",
+      "start_date": "2025-01",
+      "end_date": "Present",
+      "is_current": true,
+      "location": "Kathmandu, Nepal",
+      "description": "Prepare architectural working drawings, 3D models, visual renderings, and digital client presentations.",
+      "responsibilities": [
+        "Create detailed AutoCAD 2D drawings and 3D models for residential and commercial projects.",
+        "Produce high-resolution 3D renders using SketchUp, Lumion, and V-Ray.",
+        "Assist lead architects during site visits, measurements, and contractor coordination."
+      ],
+      "technologies": [
+        "AutoCAD",
+        "Revit",
+        "SketchUp",
+        "Lumion",
+        "Photoshop"
+      ],
+      "achievements": [
+        "Delivered 3D visual presentations for 10+ residential client projects.",
+        "Built an internal digital library of 3D CAD furniture blocks."
+      ],
+      "display_order": 1,
+      "is_published": true
+    },
+    {
+      "id": "exp-2",
+      "organization": "Freelance Architectural & Web Projects",
+      "position": "Freelance Designer & Web Developer",
+      "start_date": "2023-06",
+      "end_date": "2024-12",
+      "is_current": false,
+      "location": "Remote / Kathmandu",
+      "description": "Designed custom responsive portfolio websites, store layouts, and 3D architectural visual assets for clients.",
+      "responsibilities": [
+        "Built responsive websites using React, Tailwind CSS, and Node.js.",
+        "Created 3D architectural illustrations and floorplan presentation graphics.",
+        "Managed direct client communication from initial draft to final delivery."
+      ],
+      "technologies": [
+        "React",
+        "Tailwind CSS",
+        "JavaScript",
+        "AutoCAD",
+        "Figma"
+      ],
+      "achievements": [
+        "Successfully completed 12+ client projects with positive feedback.",
+        "Built custom lightweight admin CMS tools for non-technical site owners."
+      ],
+      "display_order": 2,
+      "is_published": true
+    }
+  ],
+  "skills": [
+    {
+      "id": "s-1",
+      "name": "React & Vite",
+      "icon": "Code",
+      "category": "Frontend",
+      "display_order": 1,
+      "is_active": true
+    },
+    {
+      "id": "s-2",
+      "name": "Tailwind CSS",
+      "icon": "Layout",
+      "category": "Frontend",
+      "display_order": 2,
+      "is_active": true
+    },
+    {
+      "id": "s-3",
+      "name": "JavaScript & HTML/CSS",
+      "icon": "Zap",
+      "category": "Frontend",
+      "display_order": 3,
+      "is_active": true
+    },
+    {
+      "id": "s-4",
+      "name": "Node.js & Express",
+      "icon": "Server",
+      "category": "Backend",
+      "display_order": 4,
+      "is_active": true
+    },
+    {
+      "id": "s-5",
+      "name": "REST APIs",
+      "icon": "Globe",
+      "category": "Backend",
+      "display_order": 5,
+      "is_active": true
+    },
+    {
+      "id": "s-6",
+      "name": "PostgreSQL & SQLite",
+      "icon": "Database",
+      "category": "Database",
+      "display_order": 6,
+      "is_active": true
+    },
+    {
+      "id": "s-7",
+      "name": "AutoCAD & Revit",
+      "icon": "Box",
+      "category": "Tools",
+      "display_order": 7,
+      "is_active": true
+    },
+    {
+      "id": "s-8",
+      "name": "SketchUp & Rhino",
+      "icon": "Layers",
+      "category": "Tools",
+      "display_order": 8,
+      "is_active": true
+    },
+    {
+      "id": "s-9",
+      "name": "Lumion & V-Ray",
+      "icon": "Camera",
+      "category": "Tools",
+      "display_order": 9,
+      "is_active": true
+    },
+    {
+      "id": "s-10",
+      "name": "Git & GitHub",
+      "icon": "GitBranch",
+      "category": "Other",
+      "display_order": 10,
+      "is_active": true
+    }
+  ],
+  "gallery": [
+    {
+      "id": "gal-1",
+      "title": "Architectural Light & Shadow",
+      "description": "Study of sunlight angles and concrete surfaces in modern residential design.",
+      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
+      "category": "Development",
+      "display_order": 1,
+      "is_published": true
+    },
+    {
+      "id": "gal-2",
+      "title": "Timber Shading Louvers",
+      "description": "Facade detail designed for natural climate shading in urban housing.",
+      "image": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1200&q=80",
+      "category": "Development",
+      "display_order": 2,
+      "is_published": true
+    },
+    {
+      "id": "gal-3",
+      "title": "Himalayan Site Survey",
+      "description": "Photograph documenting topography contours and natural stone masonry during site analysis.",
+      "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
+      "category": "Travel",
+      "display_order": 3,
+      "is_published": true
+    },
+    {
+      "id": "gal-4",
+      "title": "Studio Design Desk",
+      "description": "Workspace setup with architectural drafting tools and dual-monitor setup.",
+      "image": "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80",
+      "category": "Photography",
+      "display_order": 4,
+      "is_published": true
+    }
+  ],
+  "about": {
+    "heading": "Designing physical spaces and building modern web applications.",
+    "introduction": "I'm Bipal Kattel, a Junior Architect and Web Developer based in Kathmandu, Nepal. I enjoy combining architectural design, 3D spatial modeling, and clean web development to create simple, functional products.",
+    "biography": "My background spans architectural design, spatial planning, and digital web development. I hold a Bachelor of Architecture (B.Arch) degree and spend my time creating architectural drawings, 3D renderings, and building responsive web applications.\n\nI believe good design—whether a building blueprint or a web interface—should be simple, purposeful, and easy to navigate. I enjoy taking an idea from initial sketch to final presentation.",
+    "profile_image": "https://scontent.fktm21-1.fna.fbcdn.net/v/t39.30808-6/465791650_1929776887518329_3008042345498741105_n.jpg?stp=dst-jpg_tt6&cstp=mx1357x1344&ctp=s1357x1344&_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=kNhI-175N9IQ7kNvwFhkC7a&_nc_oc=AdqY--tMWsviBK2vDgFV0o-7RqtfOg5mSvcRv1X_KWaEVNo-SOFHZefa7P9MweQp6dRtjf965OUsg9wWa-R3kXNp&_nc_zt=23&_nc_ht=scontent.fktm21-1.fna&_nc_gid=eCH1aR37coK-mcPh7sSmfQ&_nc_ss=7b2a8&oh=00_AQKGOK0Zy3VEfsIQSNE4dHxS8mcDBpalas4WeC2peafCqw&oe=6AA6BD68",
+    "education": [
+      {
+        "id": "edu-1",
+        "degree": "Bachelor of Architecture (B.Arch)",
+        "institution": "Tribhuvan University, IOE",
+        "year": "2020 - 2025",
+        "details": "Studied spatial design, structural planning, AutoCAD drafting, 3D modeling, and sustainable building design."
+      },
+      {
+        "id": "edu-2",
+        "degree": "Higher Secondary in Science",
+        "institution": "St. Xavier's College",
+        "year": "2018 - 2020",
+        "details": "Focused on Physics, Mathematics, and Computer Science."
+      }
+    ],
+    "philosophy": "Keep design clean, functional, and simple. Strip away non-essential clutter and focus on usability.",
+    "interests": [
+      "Architectural Photography",
+      "3D Visual Rendering",
+      "Minimalist Interior Design",
+      "Web Development",
+      "Travel"
+    ]
+  },
+  "settings": {
+    "website_name": "Bipal Kattel — Portfolio",
+    "logo_text": "Bipal",
+    "profile_name": "Bipal Kattel",
+    "tagline": " Architect & Developer",
+    "availability_status": "Open for freelance projects & architecture roles",
+    "email": "bpal4593@gmail.com",
+    "location": "Kathmandu, Nepal",
+    "linkedin": "https://linkedin.com/in/bipalkattel",
+    "instagram": "https://instagram.com/bipal_kattel",
+    "twitter": "https://twitter.com/bipalkattel",
+    "facebook": "https://facebook.com/bipalkattel",
+    "youtube": "https://youtube.com/bipalkattel",
+    "tiktok": "https://tiktok.com/@bipal_kattel",
+    "copyright": "Bipal Kattel © 2026, All rights reserved."
+  },
+  "messages": [
+    {
+      "id": "mtwzkjsg592ua",
+      "name": "hii",
+      "email": "bikashkattel774@gmail.com",
+      "subject": "dgqGFCw",
+      "message": "HELLO",
+      "is_read": false,
+      "created_at": "2026-09-11T13:22:40.816Z"
+    },
+    {
+      "id": "mtwywtn71ua1c",
+      "name": "Bikash Kattel",
+      "email": "bikashkattel774@gmail.com",
+      "subject": "General Inquiry",
+      "message": "hello sir.",
+      "is_read": false,
+      "created_at": "2026-09-11T13:04:13.847Z"
+    },
+    {
+      "id": "msg-1",
+      "name": "Aarav Sharma",
+      "email": "aarav.sharma@example.com",
+      "subject": "Architecture & Website Inquiry",
+      "message": "Hi Bipal, I saw your portfolio and loved your dual work in architectural rendering and web development. We would like to hire you to design our office floorplan and build our company website. Please let us know your availability.",
+      "is_read": false,
+      "created_at": "2026-09-10T06:44:37.334Z"
+    }
+  ]
+}
