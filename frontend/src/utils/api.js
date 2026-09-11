@@ -12,7 +12,6 @@ export async function apiFetch(endpoint, options = {}) {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  // Remove Content-Type if sending FormData (e.g. file upload)
   if (options.body instanceof FormData) {
     delete headers['Content-Type'];
   }
@@ -25,7 +24,9 @@ export async function apiFetch(endpoint, options = {}) {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    throw new Error(data.error || `HTTP ${response.status}: ${response.statusText}`);
+    throw new Error(
+      data.error || `HTTP ${response.status}: ${response.statusText}`
+    );
   }
 
   return data;
