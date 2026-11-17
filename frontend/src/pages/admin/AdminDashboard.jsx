@@ -1173,70 +1173,91 @@ export default function AdminDashboard() {
       </div>
 
       {/* FOOTER PROFILE IMAGE */}
-      <div className="space-y-3 sm:col-span-2">
-        <label className="text-[11px] font-semibold uppercase tracking-wider text-[#857E7B] block">
-          Footer Profile Image
-        </label>
+<div className="space-y-3 sm:col-span-2">
+  <label className="text-[11px] font-semibold uppercase tracking-wider text-[#857E7B] block">
+    Profile Image
+  </label>
 
-        <div className="flex flex-col sm:flex-row sm:items-center gap-4 p-4 rounded-xl border border-[#857E7B]/20 bg-[#F7F7F2]">
+  <div className="flex flex-col sm:flex-row sm:items-center gap-4 p-4 rounded-xl border border-[#857E7B]/20 bg-[#F7F7F2]">
 
-          {/* IMAGE PREVIEW */}
-          {settings.footer_image ? (
-            <img
-              src={settings.footer_image}
-              alt="Footer profile"
-              className="w-20 h-20 rounded-full object-cover border-2 border-[#214E34]"
-            />
-          ) : (
-            <div className="w-20 h-20 rounded-full bg-[#DCE8DF] flex items-center justify-center text-[#214E34] text-xs font-medium">
-              No Image
-            </div>
-          )}
-
-          <div className="flex flex-wrap items-center gap-2">
-
-            {/* UPLOAD / REPLACE */}
-            <label className="px-4 py-2.5 bg-[#214E34] text-white text-xs font-semibold rounded-xl hover:bg-[#17251D] transition cursor-pointer flex items-center gap-2">
-              <Upload className="w-4 h-4" />
-              {settings.footer_image ? "Replace Image" : "Upload Image"}
-
-              <input
-                type="file"
-                accept="image/jpeg,image/png,image/webp,image/gif"
-                className="hidden"
-                onChange={(e) =>
-                  handleImageUpload(e, (url) =>
-                    setSettings((prev) => ({
-                      ...prev,
-                      footer_image: url
-                    }))
-                  )
-                }
-              />
-            </label>
-
-            {/* REMOVE IMAGE */}
-            {settings.footer_image && (
-              <button
-                type="button"
-                onClick={() =>
-                  setSettings((prev) => ({
-                    ...prev,
-                    footer_image: ""
-                  }))
-                }
-                className="px-4 py-2.5 border border-red-200 text-red-600 text-xs font-semibold rounded-xl hover:bg-red-50 transition"
-              >
-                Remove Image
-              </button>
-            )}
-          </div>
-        </div>
-
-        <p className="text-[10px] text-[#857E7B]">
-          Upload JPG, PNG, WEBP or GIF. Maximum file size: 5MB.
-        </p>
+    {/* IMAGE PREVIEW */}
+    {settings.footer_image ? (
+      <img
+        src={settings.footer_image}
+        alt="Footer profile"
+        className="w-20 h-20 rounded-full object-cover border-2 border-[#214E34]"
+      />
+    ) : (
+      <div className="w-20 h-20 rounded-full bg-[#DCE8DF] flex items-center justify-center text-[#214E34] text-xs font-medium">
+        No Image
       </div>
+    )}
+
+    <div className="flex flex-wrap items-center gap-2">
+
+      {/* UPLOAD / REPLACE */}
+      <label className="px-4 py-2.5 bg-[#214E34] text-white text-xs font-semibold rounded-xl hover:bg-[#17251D] transition cursor-pointer flex items-center gap-2">
+        <Upload className="w-4 h-4" />
+        {settings.footer_image ? "Replace Image" : "Upload Image"}
+
+        <input
+          type="file"
+          accept="image/jpeg,image/png,image/webp,image/gif"
+          className="hidden"
+          onChange={(e) =>
+            handleImageUpload(e, (url) =>
+              setSettings((prev) => ({
+                ...prev,
+                footer_image: url
+              }))
+            )
+          }
+        />
+      </label>
+
+      {/* REMOVE IMAGE */}
+      {settings.footer_image && (
+        <button
+          type="button"
+          onClick={() =>
+            setSettings((prev) => ({
+              ...prev,
+              footer_image: ""
+            }))
+          }
+          className="px-4 py-2.5 border border-red-200 text-red-600 text-xs font-semibold rounded-xl hover:bg-red-50 transition"
+        >
+          Remove Image
+        </button>
+      )}
+    </div>
+  </div>
+
+  {/* IMAGE URL INPUT */}
+  <div className="space-y-2">
+    <label className="text-[10px] font-semibold uppercase tracking-wider text-[#857E7B]">
+      Or Paste Image URL
+    </label>
+
+    <input
+      type="url"
+      value={settings.footer_image || ""}
+      onChange={(e) =>
+        setSettings((prev) => ({
+          ...prev,
+          footer_image: e.target.value
+        }))
+      }
+      placeholder="https://example.com/profile-image.jpg"
+      className="w-full px-4 py-3 rounded-xl border border-[#857E7B]/30 bg-white text-sm text-[#214E34] outline-none focus:border-[#214E34] transition"
+    />
+  </div>
+
+  <p className="text-[10px] text-[#857E7B]">
+    Upload JPG, PNG, WEBP or GIF (maximum 5MB), or paste a direct image URL.
+  </p>
+</div>
+
 
       {/* CONTACT EMAIL */}
       <div className="space-y-1">
