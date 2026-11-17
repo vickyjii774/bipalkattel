@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
@@ -22,6 +23,37 @@ if (!isProduction && !process.env.JWT_SECRET) {
 const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
+// CORS configuration
+const allowedOrigins = new Set([
+  'https://bipalkattel.com.np',
+  'https://www.bipalkattel.com.np',
+  'http://localhost:5173'
+]);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests without an Origin header
+    if (!origin || allowedOrigins.has(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(null, false);
+  },
+  methods: [
+    'GET',
+    'HEAD',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS'
+  ],
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization'
+  ],
+  optionsSuccessStatus: 204
+}));
 app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'DENY');
