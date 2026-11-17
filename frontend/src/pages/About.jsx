@@ -214,15 +214,7 @@ export default function About() {
 
                 <div className="w-full max-w-[130px] sm:max-w-[220px] lg:max-w-[310px] aspect-[4/5] overflow-hidden rounded-xl sm:rounded-2xl bg-[#E8ECE8] shadow-2xl">
 
-                  <img
-
-                    src="/bpal.jpg"
-
-                    alt="Profile"
-
-                    className="h-full w-full object-cover transition duration-500 hover:scale-105"
-
-                  />
+                  <img src={about?.profile_image || "/bpal.jpg"} alt="Profile" className="h-full w-full object-cover transition duration-500 hover:scale-105"/>
 
                 </div>
 

@@ -60,10 +60,10 @@ export default function Footer() {
               <h3 className="text-sm font-semibold text-white">
                 {settings.profile_name}
               </h3>
+               <span className="text-[10px] font-medium text-[#857E7B] leading-tight">
+              Architect & Developer
+            </span>
 
-              <p className="text-xs text-white/70 leading-relaxed">
-                {settings.tagline}
-              </p>
             </div>
 
           </div>
