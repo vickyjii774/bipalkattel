@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
@@ -11,9 +12,9 @@ import Projects from "./pages/Projects";
 import Experience from "./pages/Experience";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
+
 import AdminIndex from "./pages/admin/AdminIndex";
 import BackToTop from "./components/BackToTop";
-
 
 function App() {
   return (
@@ -24,7 +25,6 @@ function App() {
         <Navbar />
 
         <Routes>
-
           <Route path="/" element={<Home />} />
 
           <Route path="/about" element={<About />} />
@@ -37,16 +37,15 @@ function App() {
 
           <Route path="/gallery" element={<Gallery />} />
 
-          
+          {/* Contact Page */}
+          <Route path="/contact" element={<Contact />} />
 
+          {/* Admin Dashboard */}
           <Route path="/admin" element={<AdminIndex />} />
-
         </Routes>
 
         <Footer />
         <BackToTop />
-
-
       </BrowserRouter>
     </AuthProvider>
   );
