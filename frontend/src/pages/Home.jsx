@@ -125,73 +125,90 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FEATURED PROJECTS */}
-      <section className="py-16 bg-[#F7F7F2] border-t border-[#857E7B]/20">
-        <div className="max-w-5xl mx-auto px-5 sm:px-7 lg:px-9">
-          
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#17251D] mt-1">
-                Featured Projects
-              </h2>
+
+
+{/* FEATURED PROJECTS */}
+<section className="py-10 sm:py-16 bg-[#F7F7F2] border-t border-[#857E7B]/20">
+  <div className="max-w-5xl mx-auto px-3 sm:px-7 lg:px-9">
+
+    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6 sm:mb-8">
+      <div>
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#17251D] mt-1">
+          Featured Projects
+        </h2>
+      </div>
+
+      <Link
+        to="/projects"
+        className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#214E34] border-b border-[#214E34] pb-0.5 hover:text-[#17251D] cursor-pointer w-fit"
+      >
+        View all projects →
+      </Link>
+    </div>
+
+    {/* 3 COLUMN GRID ON ALL SCREEN SIZES */}
+    <div className="grid grid-cols-3 gap-2 sm:gap-4 lg:gap-6">
+
+      {projects.slice(0, 3).map((project) => (
+        <Link
+          key={project._id}
+          to="/projects"
+          className="group min-w-0 bg-white border border-[#857E7B]/20 rounded-lg sm:rounded-xl overflow-hidden shadow-sm hover:shadow-md hover:border-[#214E34]/40 hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between cursor-pointer"
+        >
+          <div>
+            {/* PROJECT IMAGE */}
+            <div className="relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden bg-[#DCE8DF]/40">
+              <img
+                src={project._image}
+                alt={project._title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+
+              {project._company && (
+                <span className="absolute top-1 sm:top-2.5 left-1 sm:left-2.5 bg-[#17251D]/85 backdrop-blur-md text-[#DCE8DF] text-[7px] sm:text-[9px] tracking-wider font-medium px-1 sm:px-2 py-0.5 rounded flex items-center gap-1 max-w-[90%] truncate">
+                  <Building2 className="w-2 h-2 sm:w-2.5 sm:h-2.5 shrink-0" />
+                  <span className="truncate">{project._company}</span>
+                </span>
+              )}
             </div>
-            <Link
-              to="/projects"
-              className="text-xs font-semibold uppercase tracking-wider text-[#214E34] border-b border-[#214E34] pb-0.5 hover:text-[#17251D] cursor-pointer"
-            >
-              View all projects →
-            </Link>
+
+            {/* PROJECT DETAILS */}
+            <div className="p-2 sm:p-4 space-y-1 sm:space-y-2">
+
+              <span className="text-[7px] sm:text-[10px] font-semibold text-[#857E7B] uppercase tracking-wide sm:tracking-wider line-clamp-1">
+                {project._category} · {project._year}
+              </span>
+
+              <h3 className="text-[10px] sm:text-base font-semibold text-[#17251D] group-hover:text-[#214E34] transition-colors leading-tight sm:leading-snug line-clamp-2">
+                {project._title}
+              </h3>
+
+              <p className="hidden sm:block text-xs text-[#857E7B] line-clamp-2 leading-relaxed">
+                {project._short_description}
+              </p>
+            </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.slice(0, 3).map((project) => (
-              <Link
-                key={project.id}
-                to="/projects"
-                className="group bg-white border border-[#857E7B]/20 rounded-xl overflow-hidden shadow-sm hover:shadow-md hover:border-[#214E34]/40 hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between cursor-pointer"
-              >
-                <div>
-                  <div className="relative aspect-[16/10] overflow-hidden bg-[#DCE8DF]/40">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    {project.company && (
-                      <span className="absolute top-2.5 left-2.5 bg-[#17251D]/85 backdrop-blur-md text-[#DCE8DF] text-[9px] tracking-wider font-medium px-2 py-0.5 rounded flex items-center gap-1">
-                        <Building2 className="w-2.5 h-2.5" /> {project.company}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="p-4 space-y-2">
-                    <span className="text-[10px] font-semibold text-[#857E7B] uppercase tracking-wider">
-                      {project.category} · {project.year}
-                    </span>
-                    <h3 className="text-base font-semibold text-[#17251D] group-hover:text-[#214E34] transition-colors leading-snug">
-                      {project.title}
-                    </h3>
-                    <p className="text-xs text-[#857E7B] line-clamp-2 leading-relaxed">
-                      {project.short_description}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-4 pt-0">
-                  <div className="flex flex-wrap gap-1 pt-2.5 border-t border-[#857E7B]/10">
-                    {project.technologies?.slice(0, 3).map((tech) => (
-                      <span key={tech} className="text-[9px] font-medium bg-[#DCE8DF]/50 text-[#214E34] px-1.5 py-0.5 rounded">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Link>
-            ))}
+          {/* TECHNOLOGIES */}
+          <div className="px-2 sm:px-4 pb-2 sm:pb-4">
+            <div className="flex flex-wrap gap-1 pt-1.5 sm:pt-2.5 border-t border-[#857E7B]/10">
+              {project._technologies?.slice(0, 2).map((tech) => (
+                <span
+                  key={tech}
+                  className="text-[7px] sm:text-[9px] font-medium bg-[#DCE8DF]/50 text-[#214E34] px-1 sm:px-1.5 py-0.5 rounded line-clamp-1"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
           </div>
+        </Link>
+      ))}
 
-        </div>
-      </section>
+    </div>
+  </div>
+</section>
+
 
       
 
