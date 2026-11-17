@@ -32,13 +32,17 @@ export default function Gallery() {
       ...(Array.isArray(event.images) ? event.images : []),
     ];
 
-    return [...new Set(
-      photos.filter(
-        (photo) => typeof photo === "string" && photo.trim() !== ""
-      )
-    )];
+    return [
+      ...new Set(
+        photos.filter(
+          (photo) =>
+            typeof photo === "string" && photo.trim() !== ""
+        )
+      ),
+    ];
   };
 
+  // Fetch gallery events.
   useEffect(() => {
     apiFetch("/gallery")
       .then((data) => {
@@ -47,9 +51,12 @@ export default function Gallery() {
       .catch((error) => {
         console.error("Failed to load gallery:", error);
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
+  // Filter events by category.
   const filteredItems =
     selectedCategory === "All"
       ? items
@@ -57,22 +64,27 @@ export default function Gallery() {
           (item) => item.category === selectedCategory
         );
 
+  // Open an individual event.
   const openEvent = (event) => {
     setSelectedEvent(event);
     setCurrentPhotoIndex(0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const closeEvent = () => {
+  // Close event viewer and return to event cards.
+  const closeEvent = useCallback(() => {
     setSelectedEvent(null);
     setCurrentPhotoIndex(0);
-  };
+  }, []);
 
+  // Get photos only from the selected event.
   const currentPhotos = selectedEvent
     ? getEventPhotos(selectedEvent)
     : [];
 
+  // Previous photo - loops within the selected event.
   const previousPhoto = useCallback(() => {
-    if (!selectedEvent || currentPhotos.length === 0) return;
+    if (!selectedEvent || currentPhotos.length <= 1) return;
 
     setCurrentPhotoIndex((previous) =>
       previous === 0
@@ -81,8 +93,9 @@ export default function Gallery() {
     );
   }, [selectedEvent, currentPhotos.length]);
 
+  // Next photo - loops within the selected event.
   const nextPhoto = useCallback(() => {
-    if (!selectedEvent || currentPhotos.length === 0) return;
+    if (!selectedEvent || currentPhotos.length <= 1) return;
 
     setCurrentPhotoIndex((previous) =>
       previous === currentPhotos.length - 1
@@ -91,11 +104,9 @@ export default function Gallery() {
     );
   }, [selectedEvent, currentPhotos.length]);
 
-  // Keyboard controls and prevent background scrolling.
+  // Keyboard navigation.
   useEffect(() => {
     if (!selectedEvent) return;
-
-    document.body.style.overflow = "hidden";
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") closeEvent();
@@ -106,11 +117,11 @@ export default function Gallery() {
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [selectedEvent, previousPhoto, nextPhoto]);
+  }, [selectedEvent, closeEvent, previousPhoto, nextPhoto]);
 
+  // Loading screen.
   if (loading) {
     return (
       <main className="bg-[#F7F7F2] min-h-screen flex items-center justify-center">
@@ -124,12 +135,17 @@ export default function Gallery() {
   return (
     <main className="bg-[#F7F7F2] text-[#17251D] min-h-screen pb-24">
 
-      {/* HEADER */}
+      {/* ==========================================
+          GALLERY HEADER
+      ========================================== */}
+
       <section className="max-w-5xl mx-auto px-5 sm:px-7 lg:px-9 pt-16 pb-10 text-center">
 
-       
+        <p className="text-xs uppercase tracking-[0.2em] text-[#214E34] font-semibold mb-3">
+          Moments & Memories
+        </p>
 
-        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#17251D]">
           Photo & Design Gallery
         </h1>
 
@@ -139,6 +155,7 @@ export default function Gallery() {
         </p>
 
         {/* CATEGORY FILTERS */}
+
         <div className="flex flex-wrap justify-center gap-2 pt-7">
           {categories.map((category) => (
             <button
@@ -154,197 +171,222 @@ export default function Gallery() {
             </button>
           ))}
         </div>
+
       </section>
 
-      {/* EVENT COLLECTIONS */}
-      <section className="max-w-5xl mx-auto px-5 sm:px-7 lg:px-9">
+      {/* ==========================================
+          EVENT COLLECTIONS
+          Hidden when an event is opened.
+      ========================================== */}
 
-        {filteredItems.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {!selectedEvent && (
+        <section className="max-w-5xl mx-auto px-5 sm:px-7 lg:px-9">
 
-            {filteredItems.map((event) => {
-              const photos = getEventPhotos(event);
-              const coverImage = photos[0];
+          {filteredItems.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-              if (!coverImage) return null;
+              {filteredItems.map((event) => {
+                const photos = getEventPhotos(event);
+                const coverImage = photos[0];
 
-              return (
-                <button
-                  key={event._id || event.id || event.title}
-                  onClick={() => openEvent(event)}
-                  className="group text-left rounded-2xl overflow-hidden bg-white border border-[#857E7B]/20 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-                >
+                if (!coverImage) return null;
 
-                  {/* EVENT COVER */}
-                  <div className="relative aspect-[4/3] overflow-hidden bg-[#DCE8DF]">
+                return (
+                  <button
+                    key={event._id || event.id || event.title}
+                    onClick={() => openEvent(event)}
+                    className="group text-left rounded-2xl overflow-hidden bg-white border border-[#857E7B]/20 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  >
 
-                    <img
-                      src={coverImage}
-                      alt={event.title || "Gallery event"}
-                      loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
+                    {/* EVENT COVER IMAGE */}
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#17251D]/70 via-transparent to-transparent" />
+                    <div className="relative aspect-[4/3] overflow-hidden bg-[#DCE8DF]">
 
-                    <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-[#17251D]/75 text-white backdrop-blur-md px-3 py-1.5 rounded-full">
-                      <Images className="w-3.5 h-3.5" />
-                      <span className="text-[11px] font-medium">
-                        {photos.length} Photos
-                      </span>
+                      <img
+                        src={coverImage}
+                        alt={event.title || "Gallery event"}
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#17251D]/70 via-transparent to-transparent" />
+
+                      {/* PHOTO COUNT */}
+
+                      <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-[#17251D]/75 text-white backdrop-blur-md px-3 py-1.5 rounded-full">
+                        <Images className="w-3.5 h-3.5" />
+
+                        <span className="text-[11px] font-medium">
+                          {photos.length} Photos
+                        </span>
+                      </div>
+
+                      {/* CATEGORY */}
+
+                      <div className="absolute bottom-4 left-4 text-white">
+                        <span className="text-[9px] uppercase tracking-wider bg-[#214E34] px-2 py-1 rounded">
+                          {event.category || "Gallery"}
+                        </span>
+                      </div>
+
+                      <div className="absolute bottom-4 right-4 p-2 rounded-full bg-white/20 backdrop-blur-md text-white">
+                        <Maximize2 className="w-4 h-4" />
+                      </div>
+
                     </div>
 
-                    <div className="absolute bottom-4 left-4 text-white">
-                      <span className="text-[9px] uppercase tracking-wider bg-[#214E34] px-2 py-1 rounded">
-                        {event.category || "Gallery"}
-                      </span>
+                    {/* EVENT DETAILS */}
+
+                    <div className="p-4">
+
+                      <h3 className="text-base font-semibold text-[#17251D]">
+                        {event.title || "Untitled Event"}
+                      </h3>
+
+                      {event.description && (
+                        <p className="text-xs text-[#857E7B] mt-1.5 leading-relaxed line-clamp-2">
+                          {event.description}
+                        </p>
+                      )}
+
+                      <div className="flex items-center justify-between mt-4 pt-3 border-t border-[#857E7B]/15">
+
+                        <span className="text-xs text-[#214E34] font-medium">
+                          View event photos
+                        </span>
+
+                        <ChevronRight className="w-4 h-4 text-[#214E34] group-hover:translate-x-1 transition-transform" />
+
+                      </div>
+
                     </div>
 
-                    <div className="absolute bottom-4 right-4 p-2 rounded-full bg-white/20 backdrop-blur-md text-white">
-                      <Maximize2 className="w-4 h-4" />
-                    </div>
-                  </div>
+                  </button>
+                );
+              })}
 
-                  {/* EVENT INFORMATION */}
-                  <div className="p-4">
-                    <h3 className="text-base font-semibold text-[#17251D]">
-                      {event.title || "Untitled Event"}
-                    </h3>
+            </div>
+          ) : (
+            <div className="py-24 text-center">
 
-                    {event.description && (
-                      <p className="text-xs text-[#857E7B] mt-1.5 leading-relaxed line-clamp-2">
-                        {event.description}
-                      </p>
-                    )}
+              <Images className="w-10 h-10 text-[#857E7B]/50 mx-auto mb-3" />
 
-                    <div className="flex items-center justify-between mt-4 pt-3 border-t border-[#857E7B]/15">
-                      <span className="text-xs text-[#214E34] font-medium">
-                        View event photos
-                      </span>
+              <p className="text-sm text-[#857E7B]">
+                No events available in this category.
+              </p>
 
-                      <ChevronRight className="w-4 h-4 text-[#214E34] group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
+            </div>
+          )}
 
-                </button>
-              );
-            })}
+        </section>
+      )}
 
-          </div>
-        ) : (
-          <div className="py-24 text-center">
-            <Images className="w-10 h-10 text-[#857E7B]/50 mx-auto mb-3" />
+      {/* ==========================================
+          SELECTED EVENT PHOTO VIEWER
+          Original website background.
+          Centred image card.
+      ========================================== */}
 
-            <p className="text-sm text-[#857E7B]">
-              No events available in this category.
-            </p>
-          </div>
-        )}
-      </section>
-
-      {/* EVENT PHOTO VIEWER */}
       {selectedEvent && activePhoto && (
-        <div className="fixed inset-0 z-50 bg-[#101914]/[0.97] backdrop-blur-md flex flex-col select-none">
+        <section className="max-w-5xl mx-auto px-5 sm:px-7 lg:px-9 pt-8 sm:pt-10 pb-16">
 
-          {/* TOP BAR */}
-          <div className="flex items-center justify-between px-4 sm:px-8 py-4 text-white border-b border-white/10">
+          {/* EVENT TITLE AND DESCRIPTION */}
+
+          <div className="flex items-start justify-between gap-4 mb-8">
 
             <div className="min-w-0">
-              <h2 className="text-sm sm:text-base font-semibold truncate">
+
+              <p className="text-xs uppercase tracking-[0.18em] text-[#214E34] font-semibold mb-2">
+                Gallery / {selectedEvent.category || "Event"}
+              </p>
+
+              <h2 className="text-2xl sm:text-3xl font-semibold text-[#17251D]">
                 {selectedEvent.title || "Gallery Event"}
               </h2>
 
-              <p className="text-[11px] text-white/50 mt-1">
-                {selectedEvent.category || "Gallery"}
-              </p>
+              {selectedEvent.description && (
+                <p className="text-sm text-[#857E7B] mt-2 max-w-2xl leading-relaxed">
+                  {selectedEvent.description}
+                </p>
+              )}
+
             </div>
 
-            <div className="flex items-center gap-3 shrink-0">
+            {/* CLOSE BUTTON */}
 
-              <span className="text-xs font-mono bg-white/10 px-3 py-1.5 rounded-full">
-                {currentPhotoIndex + 1} / {currentPhotos.length}
+            <button
+              onClick={closeEvent}
+              aria-label="Close event gallery"
+              className="shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full border border-[#857E7B]/30 bg-white text-[#17251D] hover:bg-[#214E34] hover:text-white hover:border-[#214E34] transition-all duration-200"
+            >
+              <X className="w-4 h-4" />
+
+              <span className="text-xs font-semibold">
+                Close
+              </span>
+            </button>
+
+          </div>
+
+          {/* CENTRED IMAGE CARD */}
+
+          <div className="max-w-4xl mx-auto">
+
+            <div className="relative bg-white rounded-2xl overflow-hidden border border-[#857E7B]/20 shadow-lg">
+
+              {/* MAIN IMAGE */}
+
+              <div className="w-full h-[55vh] sm:h-[65vh] min-h-[280px] flex items-center justify-center p-2 sm:p-4">
+
+                <img
+                  key={activePhoto}
+                  src={activePhoto}
+                  alt={`${selectedEvent.title || "Event"} photo ${currentPhotoIndex + 1}`}
+                  className="w-full h-full object-contain rounded-lg"
+                  draggable="false"
+                />
+
+              </div>
+
+              {/* PREVIOUS PHOTO */}
+
+              {currentPhotos.length > 1 && (
+                <button
+                  onClick={previousPhoto}
+                  aria-label="Previous photo"
+                  className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/95 border border-[#857E7B]/20 text-[#214E34] shadow-md hover:bg-[#214E34] hover:text-white transition-all duration-200"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+              )}
+
+              {/* NEXT PHOTO */}
+
+              {currentPhotos.length > 1 && (
+                <button
+                  onClick={nextPhoto}
+                  aria-label="Next photo"
+                  className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/95 border border-[#857E7B]/20 text-[#214E34] shadow-md hover:bg-[#214E34] hover:text-white transition-all duration-200"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              )}
+
+            </div>
+
+            {/* PHOTO COUNTER */}
+
+            <div className="flex items-center justify-center mt-5">
+
+              <span className="text-xs font-semibold text-[#214E34] bg-white border border-[#857E7B]/20 px-4 py-2 rounded-full">
+                Photo {currentPhotoIndex + 1} of {currentPhotos.length}
               </span>
 
-              <button
-                onClick={closeEvent}
-                aria-label="Close gallery"
-                className="p-2.5 rounded-full text-white hover:bg-red-500 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-            </div>
-          </div>
-
-          {/* MAIN PHOTO */}
-          <div className="relative flex-1 min-h-0 flex items-center justify-center px-3 sm:px-16 py-4">
-
-            <img
-              key={activePhoto}
-              src={activePhoto}
-              alt={`${selectedEvent.title || "Event"} photo ${currentPhotoIndex + 1}`}
-              className="max-h-full max-w-full object-contain rounded-lg shadow-2xl"
-              draggable="false"
-            />
-
-            {/* PREVIOUS */}
-            {currentPhotos.length > 1 && (
-              <button
-                onClick={previousPhoto}
-                aria-label="Previous photo"
-                className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-[#214E34] text-white backdrop-blur-md transition"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-            )}
-
-            {/* NEXT */}
-            {currentPhotos.length > 1 && (
-              <button
-                onClick={nextPhoto}
-                aria-label="Next photo"
-                className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-[#214E34] text-white backdrop-blur-md transition"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-            )}
-          </div>
-
-          {/* BOTTOM INFORMATION */}
-          <div className="px-4 sm:px-8 py-4 text-center border-t border-white/10">
-
-            <h3 className="text-sm font-medium text-white">
-              {selectedEvent.title}
-            </h3>
-
-            {selectedEvent.description && (
-              <p className="text-xs text-white/50 mt-1 max-w-xl mx-auto">
-                {selectedEvent.description}
-              </p>
-            )}
-
-            {/* PHOTO PROGRESS */}
-            <div className="flex justify-center gap-1 mt-4">
-              {currentPhotos.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentPhotoIndex(index)}
-                  aria-label={`Go to photo ${index + 1}`}
-                  className={`h-1 rounded-full transition-all ${
-                    index === currentPhotoIndex
-                      ? "w-7 bg-white"
-                      : "w-2 bg-white/30 hover:bg-white/60"
-                  }`}
-                />
-              ))}
             </div>
 
-            <p className="text-[10px] text-white/40 mt-3">
-              Use ← → arrow keys to navigate · ESC to close
-            </p>
-
           </div>
-        </div>
+
+        </section>
       )}
 
     </main>
