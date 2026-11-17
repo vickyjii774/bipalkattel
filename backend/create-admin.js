@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { readDb, writeDb, generateId } from './db.js';
+import { readDb, writeDb, generateId, DB_FILE } from './db.js';
 
 const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
 const password = process.env.ADMIN_PASSWORD;
@@ -17,6 +17,8 @@ if (password.length < 12) {
   console.error('ADMIN_PASSWORD must be at least 12 characters long.');
   process.exit(1);
 }
+
+console.log('ADMIN SCRIPT DATABASE:', DB_FILE);
 
 const db = readDb();
 db.admin_users ||= [];
